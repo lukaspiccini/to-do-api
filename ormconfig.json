@@ -1,0 +1,20 @@
+{
+  "type": "mssql",
+  "host": "localhost",
+  "port": 1433,
+  "database": "todo",
+  "username": "SA",
+  "password": "P4ssw0rd!",
+  "extra": {
+    "driver": "msnodesqlv8",
+    "options": {
+      "encrypt": true,
+      "trustedConnection": true,
+      "trustServerCertificate": true
+    }
+  },
+  "entities": [
+    "dist/**/*.entity{.ts,.js}"
+  ],
+  "synchronize": true
+}
