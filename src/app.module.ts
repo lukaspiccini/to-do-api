@@ -5,12 +5,16 @@ import { Connection } from 'typeorm'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './users/users.module'
 import { AuthModule } from './auth/auth.module'
+import { ProjectsModule } from './projects/projects.module'
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({
+      autoLoadEntities: true
+    }),
     UsersModule,
-    AuthModule
+    AuthModule,
+    ProjectsModule
   ],
   controllers: [AppController],
   providers: [AppService],

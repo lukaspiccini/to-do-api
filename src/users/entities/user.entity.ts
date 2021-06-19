@@ -6,16 +6,16 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ nullable: false, default: '' })
   firstName: string
 
-  @Column()
+  @Column({ nullable: false, default: '' })
   lastName: string
 
-  @Column()
+  @Column({ nullable: false, default: '' })
   login: string
 
-  @Column()
+  @Column({ nullable: false, default: '' })
   password: string
 
   @BeforeInsert()
