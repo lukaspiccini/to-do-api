@@ -1,24 +1,29 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common'
+import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Req } from '@nestjs/common'
 import { ProjectDTO } from './dto/project.dto'
-import { ProjectsService } from './projects.service';
+import { ProjectsService } from './projects.service'
+import { AuthGuard } from '../guards/auth.guard'
 
 @Controller('projects')
+@UseGuards(AuthGuard)
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) { }
 
   @Post()
-  create(@Body() createProjectDTO: ProjectDTO) {
-    return this.projectsService.create(createProjectDTO)
+  create(@Req() request: any, @Body() createProjectDTO: ProjectDTO) {
+    const { user } = request
+    return this.projectsService.create(user, createProjectDTO)
   }
 
   @Get()
-  findAll() {
-    return this.projectsService.findAll()
+  findAll(@Req() request: any) {
+    const { user } = request
+    return this.projectsService.findAllByUser(user)
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectsService.findOne(id)
+  findOne(@Req() request: any, @Param('id') id: string) {
+    const { user } = request
+    return this.projectsService.findOne(user, id)
   }
 
   @Put(':id')
@@ -27,7 +32,8 @@ export class ProjectsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.projectsService.remove(id)
+  remove(@Req() request: any, @Param('id') id: string) {
+    const { user } = request
+    return this.projectsService.remove(user, id)
   }
 }
