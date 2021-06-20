@@ -19,18 +19,22 @@ export class ProjectsService {
   }
 
   findAllByUser(user: number): Promise<Project[]> {
-    return this.projectsRepository.find({ where: { userId: user }, relations: ['user'] });
+    return this.projectsRepository.find({ where: { userId: user }, relations: ['user', 'tasks'] });
   }
 
   async findOne(user: number, id: string): Promise<Project> {
-    const project: Project = await this.projectsRepository.findOne(id)
+    const project: Project = await this.projectsRepository.findOne(id, { relations: ['user', 'tasks'] })
 
     if (project.userId !== user) throw new Error('User not allowed to access this project')
 
     return project
   }
 
-  update(id: string, updateProjectDTO: ProjectDTO) {
+  async update(user: number, id: string, updateProjectDTO: ProjectDTO) {
+    const project: Project = await this.projectsRepository.findOne(id)
+
+    if (project.userId !== user) throw new Error('User not allowed to update this project')
+
     return this.projectsRepository.update(id, updateProjectDTO)
   }
 

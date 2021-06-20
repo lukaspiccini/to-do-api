@@ -27,8 +27,9 @@ export class ProjectsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateProjectDTO: ProjectDTO) {
-    return this.projectsService.update(id, updateProjectDTO)
+  update(@Req() request: any, @Param('id') id: string, @Body() updateProjectDTO: ProjectDTO) {
+    const { user } = request
+    return this.projectsService.update(user, id, updateProjectDTO)
   }
 
   @Delete(':id')

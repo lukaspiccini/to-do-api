@@ -1,5 +1,6 @@
+import { Task } from 'src/tasks/entities/task.entity'
 import { User } from 'src/users/entities/user.entity'
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm'
 
 @Entity()
 export class Project {
@@ -14,4 +15,7 @@ export class Project {
 
   @ManyToOne(() => User, user => user.projects)
   user: User
+
+  @OneToMany(() => Task, task => task.project)
+  tasks: Task[]
 }
