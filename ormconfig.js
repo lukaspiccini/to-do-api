@@ -1,10 +1,10 @@
-{
+module.exports = {
   "type": "mssql",
-  "host": "localhost",
-  "port": 1433,
-  "database": "todo",
-  "username": "SA",
-  "password": "P4ssw0rd!",
+  "host": process.env.DB_HOST,
+  "port": parseInt(process.env.DB_PORT),
+  "database": process.env.DB_NAME,
+  "username": process.env.DB_USERNAME,
+  "password": process.env.DB_PASSWORD,
   "extra": {
     "driver": "msnodesqlv8",
     "options": {

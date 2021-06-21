@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ProjectDTO } from './dto/project.dto';
-import { Project } from './entities/project.entity';
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { ProjectDTO } from './dto/project.dto'
+import { Project } from './entities/project.entity'
 
 @Injectable()
 export class ProjectsService {
@@ -19,7 +19,7 @@ export class ProjectsService {
   }
 
   findAllByUser(user: number): Promise<Project[]> {
-    return this.projectsRepository.find({ where: { userId: user }, relations: ['user', 'tasks'] });
+    return this.projectsRepository.find({ where: { userId: user }, relations: ['user', 'tasks'] })
   }
 
   async findOne(user: number, id: string): Promise<Project> {
@@ -43,6 +43,6 @@ export class ProjectsService {
 
     if (project.userId !== user) throw new Error('User not allowed to delete this project')
 
-    await this.projectsRepository.delete(id);
+    await this.projectsRepository.delete(id)
   }
 }

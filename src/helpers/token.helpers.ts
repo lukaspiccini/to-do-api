@@ -5,15 +5,15 @@ export function generateToken(user: User): string {
   const token = jwt.sign({
     user
   },
-    'mysupersecret',
+    process.env.JWT_SECRET,
     {
-      expiresIn: 3600
+      expiresIn: 86400
     })
 
   return token
 }
 
 export function decodeToken(token: string): User {
-  const decoded = jwt.verify(token, 'mysupersecret')
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
   return decoded?.user
 }

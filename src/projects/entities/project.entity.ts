@@ -13,7 +13,7 @@ export class Project {
   @Column({ type: 'int', nullable: true })
   userId: number
 
-  @ManyToOne(() => User, user => user.projects)
+  @ManyToOne(() => User, user => user.projects, { onDelete: 'CASCADE' })
   user: User
 
   @OneToMany(() => Task, task => task.project)

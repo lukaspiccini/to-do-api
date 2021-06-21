@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, OneToMany } from 'typeorm';
-import { Project } from '../../projects/entities/project.entity';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, OneToMany } from 'typeorm'
+import { Project } from '../../projects/entities/project.entity'
 const bcrypt = require('bcrypt')
 
 @Entity()

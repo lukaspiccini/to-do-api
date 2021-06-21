@@ -18,6 +18,6 @@ export class Task {
   @Column()
   projectId: number
 
-  @ManyToOne(() => Project, project => project.tasks)
+  @ManyToOne(() => Project, project => project.tasks, { onDelete: 'CASCADE' })
   project: Project
 }

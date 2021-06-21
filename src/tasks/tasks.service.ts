@@ -28,7 +28,7 @@ export class TasksService {
   }
 
   findAllByProject(user: number): Promise<Task[]> {
-    return this.tasksRepository.find({ where: { userId: user }, relations: ['project'] });
+    return this.tasksRepository.find({ where: { userId: user }, relations: ['project'] })
   }
 
   async findOne(user: number, id: string): Promise<Task> {
@@ -52,6 +52,6 @@ export class TasksService {
 
     if (task.project.userId !== user) throw new Error('User not allowed to delete this task')
 
-    await this.tasksRepository.delete(id);
+    await this.tasksRepository.delete(id)
   }
 }
